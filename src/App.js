@@ -35,12 +35,11 @@ function App() {
 		})
 			.then((resp) => resp.json())
 			.then((updatedTodolist) => {
-				const oldTodo = todolists.filter(
-					(todo) => todo.id !== updatedTodolist.id
+				setTodolists(
+					todolists.map((todo) =>
+						todo.id === updatedTodolist.id ? updatedTodolist : todo
+					)
 				);
-
-				console.log('todos', oldTodo);
-				setTodolists([...oldTodo, updatedTodolist]);
 			})
 			.catch((err) => console.log(err));
 	};
